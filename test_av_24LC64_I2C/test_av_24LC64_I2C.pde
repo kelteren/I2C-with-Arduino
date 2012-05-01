@@ -1,3 +1,12 @@
+/*
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <github.com/kelteren> wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy me a beer in return. Thomas Karlsen
+ * ----------------------------------------------------------------------------
+ */
+
 // sketch to read entire chip 32 bytes at a time, display on serial monitor with progress indicated.
 // July2010- Volkemon tweaked and commented.
 //	_ _
@@ -27,10 +36,11 @@
   
 #include <Wire.h>
 
-char chipAdress=0x50;        // Binary 10100000 . Three bits after 1010 (currently 000) are used to specify to what A2, A1, A0 are connected to, ground or vcc. See comment above. Last bit specifies the opertation - 0 for write, 1 for read. This is controlled for you by the Wire library. :)
-int block = 0;
+char  chipAdress=0x50;        // Binary 10100000 . Three bits after 1010 (currently 000) are used to specify to what A2, A1, A0 are connected to, ground or vcc. See comment above. Last bit specifies the opertation - 0 for write, 1 for read. This is controlled for you by the Wire library. :)
+int   block = 0;
 
-void setup(){
+void setup()
+{
   Wire.begin();           // enable the i2c bus
   Serial.begin(19200);   // Did you set your serial monitor to 19200?
   Wire.beginTransmission(chipAdress);    // chip address on the TWI bus, not chip memory address.
@@ -40,15 +50,16 @@ void setup(){
   Wire.send(0x00);      
   Wire.send(0x00);    
   
-  Wire.endTransmission(); // sends Wire buffer to chip, sets Internal Address Pointer to '0'
-  
+  Wire.endTransmission(); // sends Wire buffer to chip, sets Internal Address Pointer to '0' 
 }
 
-void loop(){
+void loop()
+{
   Serial.print(block);
   Serial.print  ("\t");
   Wire.requestFrom(chipAdress, 32);          // requests 32 Bytes of data in a packet, maximum string size.
-  while(Wire.available()){                   // 'while loop' start, Checks to see if data is waiting
+  while(Wire.available())                   // 'while loop' start, Checks to see if data is waiting
+  {
     Serial.print(" ");                       // space to format packets on serial monitor
     Serial.print(Wire.receive(),HEX);      // print the values received on the serial monitor
   }                                          // end bracket for 'while loop'
@@ -56,14 +67,14 @@ void loop(){
 
   Serial.println("");
 
-  if (block >= 255){
+  if (block >= 255)
+  {
     Serial.println("End Of Memory");
     while(true){
     }
-  }else{
+  }else
+  {
     block += 1;    
   }
   delay(30);
-
 }
-
