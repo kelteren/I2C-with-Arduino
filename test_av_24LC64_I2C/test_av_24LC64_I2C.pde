@@ -70,7 +70,8 @@ void loop()
   if (block >= 255)
   {
     Serial.println("End Of Memory");
-    while(true){
+    while(true){                              // press reset if you want a new printout
+      //nada                                
     }
   }else
   {
