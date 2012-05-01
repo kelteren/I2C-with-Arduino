@@ -30,17 +30,15 @@ void mottak(int numBytes){
 //  delay(150);
 //  digitalWrite(ledPin,LOW);
 
-if( tall & 1 ){
-  Serial.print(0x0);
-  Serial.print(0x0);
-  Serial.print(0x0);
-  Serial.print(0x1);
-}else{
-  Serial.print(0x0);
-  Serial.print(0x0);
-  Serial.print(0x0);
-  Serial.print(0x1);
-}
-
-  
+  if( tall & 1 ){
+    Serial.print(0x0);
+    Serial.print(0x0);
+    Serial.print(0x0);
+    Serial.print(0x1);
+  }else{
+    Serial.print(0x0);
+    Serial.print(0x0);
+    Serial.print(0x0);
+    Serial.print(0x0);
+  }
 }
