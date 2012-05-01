@@ -5,7 +5,7 @@ int ledB = 6;
 int ledC = 5;
 int ledD = 4;
 
-int tid  = 750;
+int jiffy  = 750;
 
 void setup()
 {
@@ -28,7 +28,7 @@ void loop()
     Wire.write(teller);
     Wire.endTransmission();
 
-    delay(tid);
+    delay(jiffy);
   }
 }
 
