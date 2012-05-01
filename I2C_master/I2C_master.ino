@@ -7,7 +7,8 @@ int ledD = 4;
 
 int tid  = 750;
 
-void setup(){
+void setup()
+{
   Wire.begin();
 
   pinMode(ledA,OUTPUT);
@@ -16,11 +17,12 @@ void setup(){
   pinMode(ledD,OUTPUT);
 }
 
-void loop(){
+void loop()
+{
 
   for(byte teller = 0 ; teller<16 ; teller++){
 
-    vis(teller);
+    show(teller);
 
     Wire.beginTransmission(2);
     Wire.write(teller);
@@ -31,7 +33,7 @@ void loop(){
 }
 
 
-void vis(int tall)
+void show(int tall)
 {
   digitalWrite(ledA, (tall & B1) && HIGH);
   digitalWrite(ledB, (tall & B10) && HIGH);
