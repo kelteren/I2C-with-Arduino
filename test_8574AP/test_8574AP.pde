@@ -7,31 +7,31 @@ int delayTime = 2000;
 void setup(){
   Serial.begin(9600);
   Wire.begin();
-  Serial.print("adresse til expander: ");
+  Serial.print("adress to expander: ");
   Serial.println(slaveAddress,BIN);
 }
 
 
 void loop(){
-  Serial.println("Skriver 0x00 til expander");
+  Serial.println("Writing 0x00 to expander");
   skrivData(0x00);
-  Serial.print("Avlest: ");
-  Serial.println(lesData(), BIN);
+  Serial.print("Read: ");
+  Serial.println(readData(), BIN);
   delay(delayTime);
-  Serial.println("Skriver 0xFF til expander");
+  Serial.println("Writing 0xFF to expander");
   skrivData(0xFF);
-  Serial.print("avlest: ");
-  Serial.println(lesData(), BIN);
+  Serial.print("Read: ");
+  Serial.println(readData(), BIN);
   delay(delayTime);
 }
 
-void skrivData(byte _data){
+void writeData(byte _data){
   Wire.beginTransmission(slaveAddress);
   Wire.send(_data);
   Wire.endTransmission();
 }
 
-byte lesData(){
+byte readData(){
   byte _data;
   Wire.requestFrom(slaveAddress,1);
   if(Wire.available()){
